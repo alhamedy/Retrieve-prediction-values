@@ -1,0 +1,17 @@
+import joblib
+import pandas as pd
+
+classifer = joblib.load("cpu model file name.pkl")
+df_range = pd.DataFrame({
+    'Node-ID': 'node-id number',
+    'Timestamp': pd.date_range(start='yyyy-mm-dd hh:mm:ss', end='yyyy-mm-dd hh:mm:ss'', freq='15MIN') //the start date and end date of the prediction period and the frequency of time series
+})
+
+res = classifer.forecast(df_range)
+
+df_result = df_range.copy()
+df_result['prediction'] = res[0]
+
+df_result
+
+df_result.to_csv('prediction.csv') //to get the csv file of the prediction values
